@@ -73,7 +73,7 @@ type WeatherEntry = {
   dt_txt: string;
 };
 
-const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY
+const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
 export default function Home() {
 
