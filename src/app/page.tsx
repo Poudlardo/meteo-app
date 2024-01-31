@@ -73,11 +73,14 @@ type WeatherEntry = {
   dt_txt: string;
 };
 
+const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY
+
 export default function Home() {
 
   const { isLoading, error, data } = useQuery<WeatherApiResponse>('repoData', async () => 
   {
-    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=paris&appid=ab3d50bb4076753a86aa1335ddf0fd3a&cnt=56`)
+
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=paris&appid=${API_KEY}&cnt=56`)
     return data;
   }
 

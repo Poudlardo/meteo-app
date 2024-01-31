@@ -12,6 +12,19 @@ const [error, setError] = useState("");
 const [suggestions, setSuggestions] = useState<string[]>([]);
 const [showSuggestions, setShowSuggestions] = useState(false);
 
+async function handleInputChange(value: string) {
+    setCity(value);
+    if (value.length >= 3) {
+        try {
+            const response = await axios.get(
+                `https://api.openweathermap.org/data/2.5/find?q=${value}&appid${API_KEY}`
+            );
+        } catch (error) {
+
+        }
+    }
+}
+
     return (
         <nav className="shadow-sm sticky top-0 left-0 z-50 bg-white">
             <div className="h-[80px] w-full flex justify-between items-center max-w-7xl px-3 mx-auto">
@@ -25,7 +38,10 @@ const [showSuggestions, setShowSuggestions] = useState(false);
                     <p className="text-slate-900/80 text-sm"> France </p>
                     <div>
                         {/** SearchBox */}
-                        <SearchBox/>
+                        <SearchBox
+                        value={city}
+                        onChange={(e) => handleInputChange(e.target.value)}
+                        />
                     </div>
                 </section>
             </div>
