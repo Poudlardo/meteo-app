@@ -20,7 +20,7 @@ import { loadingCityAtom, placeAtom } from "./atom";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 
-// https://api.openweathermap.org/data/2.5/forecast?q=paris&appid=ab3d50bb4076753a86aa1335ddf0fd3a&cnt=56
+// https://api.openweathermap.org/data/2.5/forecast?q=paris&lang=fr&appid=ab3d50bb4076753a86aa1335ddf0fd3a&cnt=56
 
 type WeatherApiResponse = {
   cod: string;
@@ -86,7 +86,7 @@ export default function Home()  {
   const { isLoading, error, data, refetch } = useQuery<WeatherApiResponse>('repoData', async () => 
   {
 
-  const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${API_KEY}&cnt=56`)
+  const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${API_KEY}&lang=fr&cnt=56`)
     return data;
   }
 
@@ -164,10 +164,10 @@ if (isLoading)
                 className="flex flex-col justify-between gap-2 items-center text-xs font-semibold"
                 >
                 <p>
-                  {format(parseISO(d.dt_txt), 'HH:mm')}
+                  {format(parseISO(d.dt_txt), 'HH:mm', { locale: frCA })}
                 </p>
-                {/** <WeatherIcon iconName={d.weather[0].icon}/> */}
-                <WeatherIcon iconName={getDayOrNightIcon(d.weather[0].icon, d.dt_txt)}/>
+                {/** <WeatherIcon iconname={d.weather[0].icon}/> */}
+                <WeatherIcon iconname={getDayOrNightIcon(d.weather[0].icon, d.dt_txt)}/>
                 <p>{convertKelvinToCelsius(d?.main.temp ?? 0)}°</p>
                 </div>
                 )}
@@ -181,7 +181,7 @@ if (isLoading)
                 {firstData?.weather[0].description}{" "}
               </p>
               <WeatherIcon 
-              iconName={getDayOrNightIcon(
+              iconname={getDayOrNightIcon(
                 firstData?.weather[0].icon ?? "",
                 firstData?.dt_txt ?? ""
               )}
@@ -211,7 +211,7 @@ if (isLoading)
                 description={d?.weather[0].description ?? ""}
                 weatherIcon={d?.weather[0].icon ?? "01d"}
                 date={format(parseISO(d?.dt_txt ?? ""), "dd.MM")}
-                day={format(parseISO(d?.dt_txt ?? ""), "EEEE")}
+                day={format(parseISO(d?.dt_txt ?? ""), "EEEE", { locale: frCA })}
                 temp={d?.main.temp ?? 0}
                 feels_like={d?.main.feels_like ?? 0}
                 temp_min={d?.main.temp_min ?? 0}

@@ -32,7 +32,7 @@ export default function ForecastWeatherDetail(props: ForecastWeatherDetailProps)
         <Container className='gap-4'>
             <section className=' flex gap-4 items-center px-4'>
                 <div className='flex flex-col items-center'>
-                    <WeatherIcon iconName={weatherIcon} /> 
+                    <WeatherIcon iconname={weatherIcon} /> 
                     <p>{date}</p>
                     <p className='text-sm'>{day}</p>
                 </div>

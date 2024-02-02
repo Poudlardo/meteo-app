@@ -26,7 +26,7 @@ async function handleInputChange(value: string) {
     if (value.length >= 3) {
         try {
             const response = await axios.get(
-                `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
+                `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}&lang=fr`
             );
             const suggestions = response.data.list.map((item:any) => item.name);
             setSuggestions(suggestions);
@@ -70,7 +70,7 @@ function handleCurrentLocation() {
            try {
             setLoadingCity(true);
             const response = await axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&lang=fr`
             );
             setTimeout(() => {
                 setLoadingCity(false);
@@ -86,10 +86,10 @@ function handleCurrentLocation() {
         <>
             <nav className="shadow-sm sticky top-0 left-0 z-50 bg-white">
             <div className="h-[80px] w-full flex justify-between items-center max-w-7xl px-3 mx-auto">
-                <p className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                     <h2 className="text-gray-500 text-3xl">Météo</h2>
                     <MdWbSunny className="text-3xl mt-1 text-yellow-300" /> 
-                </p>
+                </div>
                 <section className="flex gap-2 items-center">
                     <MdMyLocation 
                     title="Votre position actuelle" 
@@ -115,7 +115,7 @@ function handleCurrentLocation() {
                     </div>
                 </section>
             </div>
-        </nav>
+            </nav>
         <section className="flex max-w-7xl px-3 md:hidden">
             <div className="relative ">
                             {/** SearchBox */}
