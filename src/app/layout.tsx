@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -13,9 +13,9 @@ export default function RootLayout({
 }>) {
   const queryClient = new QueryClient()
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <QueryClientProvider client={queryClient}>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className} suppressHydrationWarning={true}>{children}</body>
       </QueryClientProvider>
     </html>
   );
